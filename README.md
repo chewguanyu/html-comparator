@@ -28,3 +28,18 @@ Count of identical words found in p tag.
 
 9) meta_content_ratio:
 Comparison of meta information found in meta tag content attribute.
+
+# How to Use
+Type in terminal,
+
+```
+python3 main.py --html1 'html1_path' --html2 'html2_path'
+```
+
+Where 'html1_path' and 'html2_path' are file paths to two html source codes to be compared against each other.
+
+Example,
+
+```
+python3 main.py --html phish_test/original.html --html2 phish_test/phish.html
+```

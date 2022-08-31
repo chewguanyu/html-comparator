@@ -252,7 +252,6 @@ if __name__ == "__main__":
     
     #Feature extraction
     X = extract_features(opts.html1, opts.html2)
-    print(X)
       
     #Prediction
     y = predict(X)

@@ -1,5 +1,5 @@
 # Description
-Reads two given html source codes into BeautifulSoup objects. Extracts features and predicts whether one html source code is a phishing attempt on the other.
+Reads two given html source codes into BeautifulSoup objects. Extracts features and predicts whether one html source code is a phishing attempt masquerading as the other.
 
 Current extracted features,
 1) a_no_ratio:

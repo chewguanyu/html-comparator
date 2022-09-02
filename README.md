@@ -41,5 +41,5 @@ Where 'html1_path' and 'html2_path' are file paths to two html source codes to b
 Example,
 
 ```
-python3 main.py --html phish_test/original.html --html2 phish_test/phish.html
+python3 main.py --html1 phish_test/original.html --html2 phish_test/phish.html
 ```

@@ -44,7 +44,7 @@ Navigate to relevant iteration in the 'iterations' directory.
 Type in terminal,
 
 ```
-python3 main.py --html1 'html1_path' --html2 'html2_path'
+python3 iterations/'number'/main.py --html1 'html1_path' --html2 'html2_path'
 ```
 
 Where 'html1_path' and 'html2_path' are file paths to two html source codes to be compared against each other.
@@ -52,5 +52,5 @@ Where 'html1_path' and 'html2_path' are file paths to two html source codes to b
 Example,
 
 ```
-python3 main.py --html1 phish_test/original.html --html2 phish_test/phish.html
+python3 iterations/2/main.py --html1 phish_test/original.html --html2 phish_test/phish.html
 ```

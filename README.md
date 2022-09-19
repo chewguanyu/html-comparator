@@ -20,16 +20,27 @@ Comparison of identical style class names found in div tag class attribute.
 6) div_class_count:
 Count of identical style class names found in div tag class attribute.
 
-7) word_ratio:
-Comparison of identical words found in p tag.
+7) overall_word_ratio:
+Comparison of identical words found in title, h1 to h6, and p tag contents, as well as meta tag content attribute.
 
-8) word_count:
-Count of identical words found in p tag.
+8) overall_word_count:
+Count of identical words found in title, h1 to h6, and p tag contents, as well as meta tag content attribute.
 
 9) meta_content_ratio:
 Comparison of meta information found in meta tag content attribute.
 
+10) filtered_word_ratio:
+Same as overall_word_ratio, but filtered for words of >2 letters that begin with a capital letter or 'http'.
+
+11) filtered_word_count:
+Same as overall_word_count, but filtered for words of >2 letters that begin with a capital letter or 'http'.
+
+12) word_length_list:
+Relative length of filtered word lists.
+
 # How to Use
+Navigate to relevant iteration in the 'iterations' directory.
+
 Type in terminal,
 
 ```

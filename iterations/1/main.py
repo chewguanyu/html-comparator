@@ -238,7 +238,7 @@ def extract_features(path1, path2):
 def predict(features):
     """Load model and make a prediction
     """
-    model = pickle.load(open("htmlc.pkl", 'rb'))
+    model = pickle.load(open("iterations/1/htmlc.pkl", 'rb'))
     y = model.predict(features)
     
     return y

@@ -9,6 +9,8 @@ import argparse
 from bs4 import BeautifulSoup
 import pandas as pd
 import pickle
+import warnings
+warnings.filterwarnings("ignore")
 
 #Functions
 #These functions support feature extraction functions

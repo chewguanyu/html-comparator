@@ -8,9 +8,8 @@ Created on Wed Aug 31 11:05:36 2022
 import argparse
 from bs4 import BeautifulSoup
 import pandas as pd
+from sklearn.preprocessing import StandardScaler
 import pickle
-import warnings
-warnings.filterwarnings("ignore")
 
 #Functions
 #These functions support feature extraction functions
@@ -293,11 +292,20 @@ def extract_features(path1, path2):
     
     return features
 
+##This function loads the standardscaler and transforms features
+def scale(features, path):
+    """Load scaler and transform features
+    """
+    scaler = pickle.load(open(f"{path}/scaler.pkl", 'rb'))
+    X = scaler.transform(features)
+    
+    return X
+
 #This function loads the model and gives a prediction
-def predict(features):
+def predict(features, path):
     """Load model and make a prediction
     """
-    model = pickle.load(open("iterations/2/htmlc.pkl", 'rb'))
+    model = pickle.load(open(f"{path}/htmlc.pkl", 'rb'))
     y = model.predict(features)
     
     return y
@@ -309,11 +317,17 @@ if __name__ == "__main__":
     parser.add_argument("--html2", help='path containing 2nd .html', required = True)
     opts = parser.parse_args()
     
+    #Path of relevant iteration
+    path = "iterations/2"
+    
     #Feature extraction
-    X = extract_features(opts.html1, opts.html2)
-      
+    features = extract_features(opts.html1, opts.html2)
+    
+    #Transform features
+    X = scale(features, path)
+
     #Prediction
-    y = predict(X)
+    y = predict(X, path)
     
     if y==1:
         print("phish")

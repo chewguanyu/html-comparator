@@ -8,8 +8,9 @@ Created on Wed Aug 31 11:05:36 2022
 import argparse
 from bs4 import BeautifulSoup
 import pandas as pd
-from sklearn.preprocessing import StandardScaler
 import pickle
+import warnings
+warnings.filterwarnings("ignore")
 
 #Functions
 #These functions support feature extraction functions
@@ -281,8 +282,8 @@ def extract_features(path1, path2):
                     "link_href_count":link_href_count,
                     "div_class_ratio":div_class_ratio,
                     "div_class_count":div_class_count,
-                    "word_ratio":overall_word_ratio,
-                    "word_count":overall_word_count,
+                    "overall_word_ratio":overall_word_ratio,
+                    "overall_word_count":overall_word_count,
                     "meta_content_ratio":meta_content_ratio,
                     "filtered_word_ratio":filtered_word_ratio,
                     "filtered_word_count":filtered_word_count,

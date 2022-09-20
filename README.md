@@ -39,7 +39,7 @@ Same as overall_word_count, but filtered for words of >2 letters that begin with
 Relative length of filtered word lists.
 
 # How to Use
-Navigate to relevant iteration in the 'iterations' directory.
+Navigate to relevant iteration in the 'iterations' directory and run main.py.
 
 Type in terminal,
 

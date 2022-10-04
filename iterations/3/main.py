@@ -4,8 +4,9 @@ import argparse
 from bs4 import BeautifulSoup
 import pandas as pd
 from copy import deepcopy
-from sklearn.preprocessing import StandardScaler
 import pickle
+import warnings
+warnings.filterwarnings("ignore")
 
 #Functions
 #These functions support feature extraction functions
@@ -638,16 +639,96 @@ def extract_features(path1, path2):
     feature_dict['all_files_count'] = count
 
     features = pd.DataFrame(feature_dict, index=[0])
-
+    cols = ['a_no_ratio', 'img_src_ratio', 'link_href_ratio', 'link_href_count',
+       '2ld_a_href_ratio', '2ld_a_href_count', '2ld_link_href_ratio',
+       '2ld_link_href_count', 'all_2ld_ratio', 'all_2ld_count',
+       'meta_content_ratio', 'title_ratio', 'title_count', 'h1_ratio',
+       'h1_count', 'h2_ratio', 'h2_count', 'h3_ratio', 'h3_count', 'h4_ratio',
+       'h4_count', 'h5_ratio', 'h5_count', 'h6_ratio', 'h6_count',
+       'headers_count', 'p_ratio', 'p_count', 'div_ratio', 'div_count',
+       'a_ratio', 'a_count', 'button_ratio', 'button_count',
+       'overall_word_ratio', 'overall_word_count', 'filtered_word_ratio',
+       'filtered_word_count', 'filtered_word_list_length', 'div_class_ratio',
+       'div_class_count', 'style_file_ratio', 'style_file_count',
+       'all_files_ratio', 'all_files_count']
+    features = features[cols]
     
     return features
 
-##This function loads the standardscaler and transforms features
+#This function loads the summary scaler and produces a summary
+def summarize(features, path):
+    """Load scaler, transform features and produce summary
+    """
+    scaler = pickle.load(open(f"{path}0_scaler.pkl", 'rb'))
+    scaled = scaler.transform(features)
+    X = pd.DataFrame(scaled, index=features.index, columns=features.columns)
+    
+    #Domain related columns
+    columns = [X['a_no_ratio'].iloc[0],X['2ld_a_href_ratio'].iloc[0],X['2ld_a_href_count'].iloc[0],
+               X['2ld_link_href_ratio'].iloc[0],X['2ld_link_href_count'].iloc[0],X['all_2ld_ratio'].iloc[0],
+               X['all_2ld_count'].iloc[0]]
+    if max(columns)<1:
+        domain = 'Low'
+    elif max(columns)<2:
+        domain = "Moderate"
+    else:
+        domain = "High"
+        
+    #Image source related columns
+    columns = [X['img_src_ratio'].iloc[0]]
+    if max(columns)<1:
+        img = 'Low'
+    elif max(columns)<2:
+        img = "Moderate"
+    else:
+        img = "High"
+
+    #Word related columns
+    columns = [X['meta_content_ratio'].iloc[0],X['title_ratio'].iloc[0],X['title_count'].iloc[0],
+               X['h1_ratio'].iloc[0],X['h1_count'].iloc[0],X['h2_ratio'].iloc[0],X['h2_count'].iloc[0],X['h3_ratio'].iloc[0],
+               X['h3_count'].iloc[0],X['h4_ratio'].iloc[0],X['h4_count'].iloc[0],X['h5_ratio'].iloc[0],X['h5_count'].iloc[0],
+               X['h6_ratio'].iloc[0],X['h6_count'].iloc[0],X['headers_count'].iloc[0],X['p_ratio'].iloc[0],
+               X['p_count'].iloc[0],X['div_ratio'].iloc[0],X['div_count'].iloc[0],X['a_ratio'].iloc[0],X['a_count'].iloc[0],
+               X['button_ratio'].iloc[0],X['button_count'].iloc[0],X['overall_word_ratio'].iloc[0],
+               X['overall_word_count'].iloc[0],X['filtered_word_ratio'].iloc[0],X['filtered_word_count'].iloc[0],
+               X['filtered_word_list_length'].iloc[0]]
+    if max(columns)<1:
+        word = 'Low'
+    elif max(columns)<2:
+        word = "Moderate"
+    else:
+        word = "High"
+        
+    #Style related columns
+    columns = [X['div_class_ratio'].iloc[0],X['div_class_count'].iloc[0],X['style_file_ratio'].iloc[0],
+               X['style_file_count'].iloc[0]]
+    if max(columns)<1:
+        style = 'Low'
+    elif max(columns)<2:
+        style = "Moderate"
+    else:
+        style = "High"
+        
+    #File reference related columns
+    columns = [X['link_href_ratio'].iloc[0],X['link_href_count'].iloc[0],X['all_files_ratio'].iloc[0],X['all_files_count'].iloc[0]]
+    if max(columns)<1:
+        file = 'Low'
+    elif max(columns)<2:
+        file = "Moderate"
+    else:
+        file = "High"
+    
+    summary = f"Domain similarity: {domain}\nImage source similarity: {img}\nWord similarity: {word}\nStyle similarity: {style}\nFile reference similarity: {file}"
+    
+    return summary
+
+#This function loads the prediction standardscaler and transforms features
 def scale(features, path):
     """Load scaler and transform features
     """
     scaler = pickle.load(open(f"{path}scaler.pkl", 'rb'))
     X = scaler.transform(features)
+    X = pd.DataFrame(X, index=features.index, columns=features.columns)
     
     return X
 
@@ -672,14 +753,21 @@ if __name__ == "__main__":
     
     #Feature extraction
     features = extract_features(opts.html1, opts.html2)
+    
+    #Transform features for summary
+    summary = summarize(features, path)
 
-    #Transform features
+    #Transform features for prediction
     X = scale(features, path)
 
     #Prediction
     y = predict(X, path)
     
+    print('\n')
+    
     if y==1:
-        print("phish")
+        print("Predicion: One page is a phish of the other.")
     else:
-        print("not phish")
+        print("Prediction: Neither page is a phish of the other.")
+    
+    print(summary+'\n')

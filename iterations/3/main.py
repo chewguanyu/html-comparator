@@ -107,7 +107,6 @@ def all_files(i):
         #File extensions are generally 3 to 6 characters or below including '.'
         #e.g. .tz or .htmlx
         if '"' in i[start+1:start+6]:
-            print(i)
             length = i[start:].find('"')
             fileend = start+length
     
@@ -669,7 +668,7 @@ if __name__ == "__main__":
     opts = parser.parse_args()
     
     #Path of relevant iteration
-    path = "/iterations/3/"
+    path = ""
     
     #Feature extraction
     features = extract_features(opts.html1, opts.html2)

@@ -106,7 +106,7 @@ def all_files(i):
         #Check for distance between . and "
         #File extensions are generally 3 to 6 characters or below including '.'
         #e.g. .tz or .htmlx
-        if '"' in i[start:start+6]:
+        if '"' in i[start+1:start+6]:
             length = i[start:].find('"')
             fileend = start+length
     
@@ -120,7 +120,7 @@ def all_files(i):
                     #reposition search start if '.' is found.
                     if e == '.':
                         length = i[start+1:].find('.')
-                        fileend = start+length
+                        fileend = start+length+1
                     proceed = False
                     break
         #Look for start of file name

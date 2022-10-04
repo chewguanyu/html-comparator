@@ -118,12 +118,7 @@ def all_files(i):
             exclude = [')',";",'.']
             for e in exclude:
                 if e in check:
-                    #reposition search start if '.' is found.
-                    if e == '.':
-                        length = i[start+1:].find('.')
-                        fileend = start+length+1
                     proceed = False
-                    break
         #Look for start of file name
             if proceed:
                 a = i[:start].rfind("/")
@@ -132,18 +127,19 @@ def all_files(i):
                 if a!=-1 or b!=-1:
                     filestart = max(a,b)+1
                     filename = i[filestart:fileend]
-                    files.append(filename)
+                    if filename!='di':
+                        files.append(filename)
             #Prepare for next iteration        
-            i = i[fileend:]
+            i = i[start+1:]
         else:
             i = i[start+1:]
     return files
 
-def files_from_lists(filelist):
+def files_from_lists(stylelist):
     """looks for filenames given a list of strings
     """
     files = []
-    for i in filelist:
+    for i in stylelist:
         subfiles = all_files(i)
         if len(subfiles)!=0:
             files.extend(subfiles)
@@ -659,6 +655,7 @@ def extract_features(path1, path2):
 def summarize(features, path):
     """Load scaler, transform features and produce summary
     """
+
     scaler = pickle.load(open(f"{path}0_scaler.pkl", 'rb'))
     scaled = scaler.transform(features)
     X = pd.DataFrame(scaled, index=features.index, columns=features.columns)

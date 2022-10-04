@@ -107,6 +107,7 @@ def all_files(i):
         #File extensions are generally 3 to 6 characters or below including '.'
         #e.g. .tz or .htmlx
         if '"' in i[start+1:start+6]:
+            print(i)
             length = i[start:].find('"')
             fileend = start+length
     

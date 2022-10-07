@@ -33,7 +33,7 @@ if __name__ == "__main__":
     print('\n')
     
     if y==1:
-        print("Predicion: One page is a phish of the other.")
+        print("Prediction: One page is a phish of the other.")
     else:
         print("Prediction: Neither page is a phish of the other.")
     

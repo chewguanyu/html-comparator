@@ -46,19 +46,21 @@ def upload():
         y = predict(X, path)
         
         if y==1:
-            result = ("<p>Prediction: One page is a phish of the other.</p>"
-                      f"<p>{summary[0]}<br>"
-                      f"{summary[1]}<br>"
-                      f"{summary[2]}<br>"
-                      f"{summary[3]}<br>"
-                      f"{summary[4]}</p>")
+            prediction = "One page is a phish of the other."
         else:
-            result = ("<p>Prediction: Neither page is a phish of the other.</p>"
-                      f"{summary[0]}<br>"
-                      f"{summary[1]}<br>"
-                      f"{summary[2]}<br>"
-                      f"{summary[3]}<br>"
-                      f"{summary[4]}</p>")
+            prediction = "Neither page is a phish of the other."
+            
+        result = (f"<p>Prediction: {prediction}</p>"
+                  f"<p>{summary[0]}<br>"
+                  f"Comparison of webpages found in the submitted source codes.</p>"
+                  f"<p>{summary[1]}<br>"
+                  f"Comparison of image storage used by the submitted source codes.</p>"
+                  f"<p>{summary[2]}<br>"
+                  f"Comparison of words found in the submitted source codes.</p>"
+                  f"<p>{summary[3]}<br>"
+                  f"Comparison of styles used by the submitted source codes.</p>"
+                  f"<p>{summary[4]}<br>"
+                  f"Comparison of external resources used by the submitted source codes.</p>")
         
     return result
         

@@ -2,6 +2,12 @@
 Reads two given html source codes into BeautifulSoup objects. Extracts features and predicts whether one html source code is a phishing attempt masquerading as the other.
 
 # How to Use
+Install requirements with
+
+```
+pip install -r requirements.txt
+```
+
 Navigate to the relevant iteration in the 'iterations' directory and run main.py for command line results or web.py for web app.
 
 ```

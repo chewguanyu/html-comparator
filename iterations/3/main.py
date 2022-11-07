@@ -13,7 +13,7 @@ if __name__ == "__main__":
     opts = parser.parse_args()
     
     #Path of relevant iteration
-    path = ""
+    path = "iterations/3/"
     
     #Get soups
     soup1, soup2 = get_soups_filepath(opts.html1, opts.html2)

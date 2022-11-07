@@ -10,22 +10,16 @@ pip install -r requirements.txt
 
 Navigate to the relevant iteration in the 'iterations' directory and run main.py for command line results or web.py for web app.
 
-```
-python3 iterations/<number>/main.py --html1 'html1_path' --html2 'html2_path'
-```
-
+For command line results,
+python3 iterations/<number>/main.py --html1 <html1_path> --html2 <html2_path'>
 Where 'html1_path' and 'html2_path' are file paths to two html source codes to be compared against each other.
 
 Example,
-
 ```
 python3 iterations/3/main.py --html1 phish_test/original.html --html2 phish_test/phish.html
 ```
 
 For web app, type in terminal,
-
-Example,
-
 ```
 flask --app iterations/3/web run
 ```

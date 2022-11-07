@@ -2,16 +2,10 @@
 Reads two given html source codes into BeautifulSoup objects. Extracts features and predicts whether one html source code is a phishing attempt masquerading as the other.
 
 # How to Use
-Change working directory to the relevant iteration in the 'iterations' directory and run main.py for command line results or web.py for web app.
-
-Example,
-```
-cd iterations/3
-```
-then,
+Navigate to the relevant iteration in the 'iterations' directory and run main.py for command line results or web.py for web app.
 
 ```
-python3 main.py --html1 'html1_path' --html2 'html2_path'
+python3 iterations/<number>/main.py --html1 'html1_path' --html2 'html2_path'
 ```
 
 Where 'html1_path' and 'html2_path' are file paths to two html source codes to be compared against each other.
@@ -19,7 +13,7 @@ Where 'html1_path' and 'html2_path' are file paths to two html source codes to b
 Example,
 
 ```
-python3 main.py --html1 phish_test/original.html --html2 phish_test/phish.html
+python3 iterations/3/main.py --html1 phish_test/original.html --html2 phish_test/phish.html
 ```
 
 For web app, type in terminal,
@@ -27,7 +21,7 @@ For web app, type in terminal,
 Example,
 
 ```
-flask --app web run
+flask --app iterations/3/web run
 ```
 
 Ctrl+click on link in terminal to open web app.

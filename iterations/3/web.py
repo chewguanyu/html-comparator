@@ -35,7 +35,7 @@ def upload():
         
         #Transform features for summary
         #When needed, define directory of 0_scaler.pkl in path
-        path=""
+        path="iterations/3/"
         summary = summarize(features, path)
         summary = summary.split('\n')
 

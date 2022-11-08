@@ -3,3 +3,4 @@ scikit_learn==1.1.2
 xgboost==1.5.0
 flask==2.2.2
 werkzeug==2.2.2
+bs4==4.11.1
